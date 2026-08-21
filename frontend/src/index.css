@@ -1,0 +1,35 @@
+:root {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  --bg-cream: #FAF3E0;
+  --bg-card: #FFFDF9;
+  --bg-section: #F5E6D3;
+  --border-beige: #E8D5B7;
+  --primary-brown: #8B5E3C;
+  --secondary-brown: #5C3A21;
+  --dark-brown: #3B2517;
+  --light-cream: #FFFDF9;
+  --accent-gold: #D4A373;
+  --text-muted: #6B4E3D;
+  --danger-red: #A44A3F;
+  --success-green: #4A7C59;
+
+  color: var(--dark-brown);
+  background-color: var(--bg-cream);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--bg-cream);
+  color: var(--dark-brown);
+}
