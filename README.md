@@ -74,23 +74,26 @@ SnackSpot/
 │   └── pom.xml
 │
 ├── .gitignore                  # Git exclusion rules
-├── README.md                   # Portfolio documentation
-├── PROJECT_STUDY_GUIDE.md      # Interview preparation guide
-└── INTERVIEW_CHEATSHEET.md     # 10-minute quick revision guide
+├── README.md                   # 
 ```
 
 ---
 
 ## 🔑 Environment Variables
 
-### Backend (`backend/src/main/resources/application.properties`)
+### Backend
+
+Configure the following environment variables for the backend:
+
 ```properties
 SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/snackspotdb
-SPRING_DATASOURCE_USERNAME=postgres
+SPRING_DATASOURCE_USERNAME=your_postgres_username
 SPRING_DATASOURCE_PASSWORD=your_postgres_password
+
 CORS_ALLOWED_ORIGINS=http://localhost:5173
-ADMIN_USERNAME=admin
-ADMIN_PASSWORD=admin123
+
+ADMIN_USERNAME=your_admin_username
+ADMIN_PASSWORD=your_admin_password
 ```
 
 ### Frontend (`frontend/.env.example`)
@@ -145,17 +148,6 @@ Open your browser at **`http://localhost:5173`**.
 
 ---
 
-## 🖼️ Screenshots & Demo Placeholders
 
-- **Home Page (Cream & Brown Theme)**: `docs/screenshots/home.png`
-- **Auth Modal (User & Admin Login)**: `docs/screenshots/auth.png`
-- **Admin Dashboard**: `docs/screenshots/admin.png`
 
----
 
-## 🔮 Future Enhancements
-
-- **JWT Authentication**: Upgrade plaintext password validation to BCrypt hashing and JSON Web Tokens.
-- **Image Upload Integration**: Direct file upload to AWS S3 or Cloudinary.
-- **Payment Gateway**: Real Stripe / Razorpay API integration.
-- **Docker Containerization**: Dockerfile and docker-compose orchestration.
