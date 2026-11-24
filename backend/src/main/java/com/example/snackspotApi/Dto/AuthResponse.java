@@ -5,16 +5,26 @@ import com.example.snackspotApi.Entity.Role;
 public class AuthResponse {
     private boolean success;
     private String message;
+    private String token;
     private String username;
     private Role role;
 
     public AuthResponse() {}
 
-    public AuthResponse(boolean success, String message, String username, Role role) {
+    public AuthResponse(boolean success, String message, String token, String username, Role role) {
         this.success = success;
         this.message = message;
+        this.token = token;
         this.username = username;
         this.role = role;
+    }
+
+    public static AuthResponse error(String message) {
+        return new AuthResponse(false, message, null, null, null);
+    }
+
+    public static AuthResponse success(String message, String token, String username, Role role) {
+        return new AuthResponse(true, message, token, username, role);
     }
 
     public boolean isSuccess() {
@@ -31,6 +41,14 @@ public class AuthResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getUsername() {

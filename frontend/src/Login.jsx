@@ -14,9 +14,23 @@ function Login({ onLogin }) {
     e.preventDefault();
     setErrorMessage("");
 
-    if (!username.trim() || !password.trim()) {
+    const trimmedUsername = username.trim();
+    const trimmedPassword = password.trim();
+
+    if (!trimmedUsername || !trimmedPassword) {
       setErrorMessage("Please enter both username and password");
       return;
+    }
+
+    if (mode === "user-register") {
+      if (trimmedUsername.length < 3) {
+        setErrorMessage("Username must be at least 3 characters long");
+        return;
+      }
+      if (trimmedPassword.length < 6) {
+        setErrorMessage("Password must be at least 6 characters long");
+        return;
+      }
     }
 
     setLoading(true);
@@ -33,9 +47,15 @@ function Login({ onLogin }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username: username.trim(), password: password.trim() }),
+      body: JSON.stringify({ username: trimmedUsername, password: trimmedPassword }),
     })
-      .then((res) => res.json().catch(() => ({ success: false, message: "Unexpected server response" })))
+      .then(async (res) => {
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          throw new Error(data.message || (res.status === 409 ? "Username already exists!" : res.status === 401 ? "Invalid username or password" : res.status === 403 ? "Access Denied: Not an Admin account" : "Authentication failed"));
+        }
+        return data;
+      })
       .then((data) => {
         setLoading(false);
         if (data.success) {
@@ -45,8 +65,9 @@ function Login({ onLogin }) {
             setPassword("");
           } else {
             const userData = {
-              username: data.username || username,
+              username: data.username || trimmedUsername,
               role: data.role || (mode === "admin-login" ? "ADMIN" : "USER"),
+              token: data.token,
             };
             localStorage.setItem("user", JSON.stringify(userData));
             onLogin(userData);
@@ -58,7 +79,7 @@ function Login({ onLogin }) {
       .catch((err) => {
         setLoading(false);
         console.error("Auth error:", err);
-        setErrorMessage("Failed to connect to server. Ensure Spring Boot backend is running.");
+        setErrorMessage(err.message || "Failed to connect to server. Ensure Spring Boot backend is running.");
       });
   };
 

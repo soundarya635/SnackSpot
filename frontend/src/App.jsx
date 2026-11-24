@@ -41,10 +41,10 @@ function App() {
   }
 
   if (user.role === "ADMIN") {
-    return <AdminDashboard user={user.username} onLogout={handleLogout} />;
+    return <AdminDashboard user={user} onLogout={handleLogout} />;
   }
 
-  return <Home user={user.username} onLogout={handleLogout} />;
+  return <Home user={user} onLogout={handleLogout} />;
 }
 
 export default App;
